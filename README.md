@@ -1,3 +1,3 @@
 # arundel
 
-Arundel is a Java library fo building computation graphs. 
+Arundel is a Java library for building computation graphs. 
