@@ -5,44 +5,40 @@ import java.util.ArrayList;
 
 
 /**
-* <p>
+ * <p>
  * Class to implement a Variable as component in the computation graph.
- * Its is used as a souce of data for other Gates. It may be trained depeneding
- * upon its usage. If it is used as a parameted for optimization, it is trained using
- * {@link Gate#update}. Otherwise the implementation simply skips the update state.
- * Note that the update state is implicitly invoke in {@link #backward}, in the case
- * of a trainable {@link Variable}.
+ * It does not per form any backward computation since it does not have
+ * any inouts. However, it retrieves the gradients from its output {@link Link}s
+ * and uses them to update the value stored.
  * </p>
  */
-public class Variable implements Gate {
+public final class Variable implements Gate {
 
     /* List of output Links */
     private List<Link> outputs;
     private double value; // value stored
-    private boolean isTrainable;
 
     /**
      * Constructs an instance of a {@link Variable} {@link Gate}
      * with an empty list of output {@link Link}s and an
      * initial value and a trainable flag.
      * @param value initial value stored in this variable
-     * @param isTrainable whether or not this Variable is trainable
      */
-    public Variable(double value, boolean isTrainable) {
+    public Variable(double value) {
         this.value = value;
-        this.isTrainable = isTrainable;
         outputs = new ArrayList<>();
     }
 
     /**
-     * Constructs an instance of a {@link Variable} {@link Gate}
-     * with an empty list of output {@link Link}s and an
-     * initial value of 0.0d and non trainable status.
+     * Setter method for value stored in this variable
+     * @param v value to be stored
      */
-    public Variable() { this(0, false); }
-
     public void setValue(double v) { value = v; }
 
+    /**
+     * Getter method for value stored
+     * @return the value stored in the this variable
+     */
     public double getValue() { return value; }
 
     public List<Link> inputs() { return null; }
@@ -60,7 +56,7 @@ public class Variable implements Gate {
 
         // However, for training, update value using
         // backpropagated gradients
-        if(isTrainable) update();
+        update();
     }
 
     public void update() {

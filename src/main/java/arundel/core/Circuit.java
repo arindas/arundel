@@ -1,6 +1,7 @@
 package arundel.core;
 
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  * <p>
@@ -34,9 +35,36 @@ import java.util.Set;
  * </p>
  */
 public class Circuit {
-    //TODO : use composition for storing Gates in the form of Variable, placeholders and operators
-    private Set<Gate> gates;
 
+    /** Gates in the computation Circuit */
+    private Set<Gate> gates = new HashSet<>();
+
+    // Placeholders for labelled data
+    private Set<Placeholder> placeholders = new HashSet<>();
+    // Variables for storing trainable data
+    private Set<Variable> variables = new HashSet<>();
+    // Operators for performing and branching computation
+    private Set<Operator> operators = new HashSet<>();
+
+    /**
+     * Adds a gate to the computation DAG i.e this Circuit.
+     * @param gate the gate to be added
+     */
+    public void addGate(Gate gate) {
+        if(gate instanceof Operator)
+            operators.add((Operator)gate);
+        else if(gate instanceof Variable) {
+            variables.add((Variable)gate);
+        } else {
+            placeholders.add((Placeholder)gate);
+        } gates.add(gate);
+    }
 
     public Set<Gate> gates() { return gates; }
+
+    public Set<Placeholder> placeholders() { return placeholders; }
+
+    public Set<Operator> operators() { return operators; }
+
+    public Set<Variable> variables() { return variables; }
 }

@@ -33,7 +33,8 @@ public interface Gate {
 
     /**
      * Returns the list of input links (incoming edges) for this Gate.
-     * @return a {@link java.util.List} of {@link arundel.core.Link}s
+     * @return a {@link java.util.List} of {@link arundel.core.Link}s, null
+     * if no inputs
      */
     List<Link> inputs();
 
