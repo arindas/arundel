@@ -1,3 +1,5 @@
+package arundel.util;
+
 /**
  * Interface for abstracting the concept of mathematical functions.
 
@@ -21,7 +23,7 @@
       * @param parameters to be operated on
       * @return the result of the operation
       */
-     double operate(double[] parameters);
+     double operate(double... parameters);
 
      /**
       * Returns the partial derivatives of this function with
@@ -29,5 +31,5 @@
       * @param parameters point of tangency
       * @return array of partial derivative values
       */
-     double[] derivatives(double[] parameters);
+     double[] derivatives(double... parameters);
  }

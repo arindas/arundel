@@ -57,7 +57,7 @@ public class TopologicalSorter {
      * @param g the gate to be visited
      * @throws InvalidDAGException when a cycle is found
      */
-    public void visit(Gate g) throws InvalidDAGException {
+    public void visit(Gate g) {
         if(isMarked.get(g) == null) // unmarked
             isMarked.put(g, false); // mark temporarily
 
@@ -83,7 +83,7 @@ public class TopologicalSorter {
      * {@link arundel.core.Gate}
      * @throws InvalidDAGException when a cycle is found
      */
-    public List<Gate> sort() throws InvalidDAGException {
+    public List<Gate> sort() {
         // for every the 'universe'
         for(Gate gate : universe)
             if(isMarked.get(universe) == null)
@@ -96,7 +96,7 @@ public class TopologicalSorter {
 /**
  * Exception class to denote invalid DAGs.
  */
-class InvalidDAGException extends Exception {
+class InvalidDAGException extends RuntimeException {
     public InvalidDAGException(String cause) {
         super(cause);
     }
