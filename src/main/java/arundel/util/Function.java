@@ -26,7 +26,8 @@
      /**
       * Returns the partial derivatives of this function with
       * respect to its parameters as an array of {@link Function}
-      * @return array of partial derivative {@link Function}s
+      * @param parameters point of tangency
+      * @return array of partial derivative values
       */
-     Function[] derivatives();
+     double[] derivatives(double[] parameters);
  }
