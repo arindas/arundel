@@ -12,5 +12,3 @@
 
 
 package arundel.util.functions;
-
-// TODO : implement Reciprocal, Negation, Identity and Constant functions

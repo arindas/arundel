@@ -2,7 +2,7 @@ package arundel.util;
 
 /**
  * Interface for abstracting the concept of mathematical functions.
-
+ *
  * A function  essentiallly operates on a set of inputs and returns an output.
  * It also has a property called derivative which denotes its rate of change with
  * the change in one of its parameters. Also, for implementation purposes we also
@@ -22,7 +22,7 @@ package arundel.util;
       * the operation. This is the elixir of the concept of functions.
       * @param parameters to be operated on
       * @return the result of the operation or {@code Double.NaN}
-      * if expected number of parameters is not found.
+      * if expected number of parameters is not found (if it matters).
       */
      double operate(double... parameters);
 

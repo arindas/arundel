@@ -1,7 +1,10 @@
 package arundel.core;
 
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+
+import arundel.util.TopologicalSorter;
 
 /**
  * <p>
@@ -60,11 +63,55 @@ public class Circuit {
         } gates.add(gate);
     }
 
+    /**
+     * Returns a {@link java.util.Set} of {@link Gate}s in this circuit.
+     * @return the {@code Set<Gate>} of the gates in this circuit.
+     */
     public Set<Gate> gates() { return gates; }
 
+    /**
+     * Returns a {@link java.util.Set} of {@link Placeholder}s in this circuit.
+     * @return the {@code Set<Placeholder>} of the gates in this circuit.
+     */
     public Set<Placeholder> placeholders() { return placeholders; }
 
+    /**
+     * Returns a {@link java.util.Set} of {@link Operator}s in this circuit.
+     * @return the {@code Set<Operator>} of the gates in this circuit.
+     */
     public Set<Operator> operators() { return operators; }
 
+    /**
+     * Returns a {@link java.util.Set} of {@link Variable}s in this circuit.
+     * @return the {@code Set<Variable>} of the gates in this circuit. 
+     */
     public Set<Variable> variables() { return variables; }
+
+    /**
+     * <p>
+     * Invokes {@link Gate#forward()} on all the elements in a topologically
+     * ordered list of the gates present in this circuit. This is the step
+     * to operate on the inputs provided to this circuit.
+     * </p>
+     */
+    public void forward() {
+        TopologicalSorter sorter = new TopologicalSorter(this);
+        List<Gate> topologicallySorted = sorter.sort();
+        for(Gate gate : topologicallySorted)
+            gate.forward();
+    }
+
+    /**
+     * <p>
+     * Invokes {@link Gate#backward()} on all the elements in a reverse
+     * topologically ordered list of the gates present in this circuit.
+     * This is the step to backpropagate to train this circuit.
+     * </p>
+     */
+    public void backward() {
+        TopologicalSorter sorter = new TopologicalSorter(this);
+        List<Gate> topologicallySorted = sorter.sort(false);
+        for(Gate gate : topologicallySorted)
+            gate.backward();
+    }
 }

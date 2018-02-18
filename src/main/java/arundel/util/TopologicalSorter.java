@@ -55,9 +55,11 @@ public class TopologicalSorter {
      * it is marked and is added to head of the list of sorted gates.
      * </p>
      * @param g the gate to be visited
+     * @param topdown order of queuing, true for topdown ordering,
+     *  false for bottom up ordering
      * @throws InvalidDAGException when a cycle is found
      */
-    public void visit(Gate g) {
+    public void visit(Gate g, boolean topdown) {
         if(isMarked.get(g) == null) // unmarked
             isMarked.put(g, false); // mark temporarily
 
@@ -69,35 +71,51 @@ public class TopologicalSorter {
 
         // for every output link of this gate
         for(Link output : g.outputs())
-            visit(output.sink); // visit the sink gate recursively
+            visit(output.sink, topdown); // visit the sink gate recursively
 
         isMarked.put(g, true); // mark permanently
-        sorted.add(0, g);
+
+        int position = topdown ? 0 : sorted.size();
+        sorted.add(position, g);
     }
 
     /**
      * Returns the sorted list of {@link arundel.core.Gate}s as
      * a {@link java.util.List} as a result of the sorting. It invokes
      * {@link #visit} for every unmarked Gate in the {@link Circuit}.
+     * @param topdown true for top-down topological sorting,
+     *  false for bottom-up topological sorting
      * @return The sorted {@link java.util.List} of
      * {@link arundel.core.Gate}
      * @throws InvalidDAGException when a cycle is found
      */
-    public List<Gate> sort() {
+    public List<Gate> sort(boolean topdown) {
         // for every the 'universe'
         for(Gate gate : universe)
             if(isMarked.get(universe) == null)
-                visit(gate); // if not marked visit it
+                visit(gate, topdown); // if not marked visit it
 
         return sorted;
     }
+
+    /**
+     * Returns the gates sorted topologically in a top-down ordering.
+     * @return {@code sort(true)}
+     */
+    public List<Gate> sort() { return sort(true); }
+
+    /**
+     * Returns the cached sorted list of gates
+     * @return the cached list of gates
+     */
+    public List<Gate> getSorted() { return sorted; }
+
+
 }
 
 /**
  * Exception class to denote invalid DAGs.
  */
 class InvalidDAGException extends RuntimeException {
-    public InvalidDAGException(String cause) {
-        super(cause);
-    }
+    public InvalidDAGException(String cause) { super(cause); }
 }
