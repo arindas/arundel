@@ -14,3 +14,5 @@ The next layer of abstraction is the functions to be used for operating on the p
 in the Operator gates. Hence we specify another abstract entity Function which implements the
 notion of mathematical functions. This library also provides a bunch of Function implementations
 to be used while building computation graphs.
+
+[Read Javadoc here.](https://arindam-das.github.io/arundel/)
