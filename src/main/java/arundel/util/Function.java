@@ -21,7 +21,8 @@ package arundel.util;
       * Operates on the given set of inputs and returns the result of
       * the operation. This is the elixir of the concept of functions.
       * @param parameters to be operated on
-      * @return the result of the operation
+      * @return the result of the operation or {@code Double.NaN}
+      * if expected number of parameters is not found.
       */
      double operate(double... parameters);
 
@@ -29,7 +30,8 @@ package arundel.util;
       * Returns the partial derivatives of this function with
       * respect to its parameters as an array of {@link Function}
       * @param parameters point of tangency
-      * @return array of partial derivative values
+      * @return array of partial derivative values,
+      * null if the expected no of parameters is not found
       */
      double[] derivatives(double... parameters);
  }

@@ -6,9 +6,11 @@
 
  * <p>
  * All classes in this package provide a static factory method {@code op()} for
- * easy creation of {@link arundel.util.Function} instances. 
+ * easy creation of {@link arundel.util.Function} instances.
  * </p>
 */
 
 
 package arundel.util.functions;
+
+// TODO : implement Reciprocal, Negation, Identity and Constant functions
