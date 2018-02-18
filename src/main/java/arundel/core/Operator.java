@@ -7,7 +7,7 @@ import arundel.util.Function;
 
 /**
  * <p>
- * An Operator is a sit for computation of data. It essentially has some inputs, performs
+ * An Operator is a site for computation of data. It essentially has some inputs, performs
  * computation on these inputs with the function it has been initialized with and writes the
  * result of thr computation to it output links. Note that this is the Gate responsible for branching
  * computation and the flow of gradient in the computation graph.
