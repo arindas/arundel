@@ -15,4 +15,4 @@ in the Operator gates. Hence we specify another abstract entity Function which i
 notion of mathematical functions. This library also provides a bunch of Function implementations
 to be used while building computation graphs.
 
-[Read Javadoc here.](https://arindam-das.github.io/arundel/)
+[Read Javadoc here.](https://arindas.github.io/arundel/)
